@@ -16,3 +16,7 @@
     return res
   end
   ####### 计算剩余报价天数 #######
+
+  #####通过时间函数获取1个月的数据信息#####
+  Article.where(created_at: (Time.now - 30.day)..Time.now)
+  #####通过时间函数获取1个月的数据信息#####
