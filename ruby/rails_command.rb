@@ -12,3 +12,7 @@ rspec spec/models/users_spec.rb
 bin/rake assets:precompile
 
 bin/rake db:migrate --trace
+
+rails cable 修改后需要重启 passenger和redius
+passenger-config restart-app
+
