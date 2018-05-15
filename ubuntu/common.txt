@@ -1,0 +1,13 @@
+passenger-config restart-app
+
+/etc/init.d/redis-server stop
+/etc/init.d/redis-server start
+/etc/init.d/redis-server restart
+
+service nginx start
+service nginx stop
+service nginx restart
+
+/etc/init.d/elasticsearch start
+/etc/init.d/elasticsearch stop
+/etc/init.d/elasticsearch restart
