@@ -1,0 +1,5 @@
+CREATE DATABASE dbname;
+
+\l 显示所有数据库
+\d 显示对应数据库的所有表
+\c dbname 选择数据库
