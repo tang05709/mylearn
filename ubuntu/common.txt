@@ -44,3 +44,11 @@ mysql -uroot -D数据库名
 1. 导入数据到数据库中得某个表
 
 mysql -uroot -D数据库名  表名
+
+apache 相关
+1. 启动apahce的命令：
+/usr/local/apache/bin/apachectl start apache
+2.  停止apache的命令：
+/usr/local/apache/bin/apachectl stop  
+3.  重启apache的命令：
+/usr/local/apache/bin/apachectl restart
