@@ -13,3 +13,26 @@ var replacePhone = function (phone) {
   return result
 }
 /*****截取并替换电话号码*****/
+
+
+/*****小程序缓存过期******/
+jxcatSetStorageSync: function(key, value) {
+  wx.setStorageSync(key, value)
+  var timestamp = new Date().getTime()
+  // 设置8小时后过期
+  var remove_time = 3600000 * 8 + timestamp
+  wx.setStorageSync(key + 'remove', remove_time)
+},
+jxcatGetStorageSync: function(key, value) {
+  var remove_time = wx.getStorageSync(key + 'remove')
+  var timestamp = new Date().getTime()
+  var res = ''
+  if (timestamp > remove_time) {
+    // 过期
+    wx.removeStorageSync(key)
+  } else {
+    res = wx.getStorageSync(key)
+  }
+  return res
+}
+/*****小程序缓存过期******/
