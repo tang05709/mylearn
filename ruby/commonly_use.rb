@@ -20,3 +20,6 @@ def  replace_phone(phone)
   phone
 end
 # 电话号码中间使用*号代替
+
+# 转码
+str.encode('utf-8','gbk',{:invalid => :replace, :undef => :replace, :replace => '?'})
