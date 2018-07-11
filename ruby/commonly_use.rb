@@ -23,3 +23,13 @@ end
 
 # 转码
 str.encode('utf-8','gbk',{:invalid => :replace, :undef => :replace, :replace => '?'})
+
+
+# 下载图片
+require 'open-uri'
+
+def download_image(url, dest)
+  open(url) do |u|
+    File.open(dest, 'wb') { |f| f.write(u.read) }
+  end
+end
