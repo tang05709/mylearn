@@ -1,0 +1,13 @@
+
+/*隐藏滚动条*/
+.nav-bar-mobile::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.nav-bar-mobile {
+    -ms-overflow-style: none;
+}
+
+.nav-bar-mobile {
+    overflow: -moz-scrollbars-none;
+}
