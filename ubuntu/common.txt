@@ -52,3 +52,9 @@ apache 相关
 /usr/local/apache/bin/apachectl stop  
 3.  重启apache的命令：
 /usr/local/apache/bin/apachectl restart
+
+elasticsearch 查询
+curl -get http://127.0.0.1:9200/_search?q=学堂
+curl -get http://127.0.0.1:9200/_source
+curl -get http://127.0.0.1:9200/_mapping
+curl -get http://127.0.0.1:9200/_cat/indices?v
