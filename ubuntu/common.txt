@@ -26,24 +26,8 @@ mysqldump -u dbuser -p -d --add-drop-table dbname >d:/dbname_db.sql
 -d 没有数据 --add-drop-table 在每个create语句之前增加一个drop table
 
 4.导入数据库
-常用source 命令
-进入mysql数据库控制台，如
-mysql -u root -p
-mysql>use 数据库
-然后使用source命令，后面参数为脚本文件(如这里用到的.sql)
-mysql>source d:/dbname.sql
+mysql -u root -p lmycms < /home/lmycms.sql
 
- 
-
- 
-
-1. 导入数据到数据库
-
-mysql -uroot -D数据库名 
-
-1. 导入数据到数据库中得某个表
-
-mysql -uroot -D数据库名  表名
 
 apache 相关
 1. 启动apahce的命令：
@@ -58,4 +42,13 @@ curl -get http://127.0.0.1:9200/_search?q=学堂
 curl -get http://127.0.0.1:9200/_source
 curl -get http://127.0.0.1:9200/_mapping
 curl -get http://127.0.0.1:9200/_cat/indices?v
-curl -get http://127.0.0.1:9200/_cat/health?v'
+curl -get http://127.0.0.1:9200/_cat/health?v
+
+查看用户
+cat /etc/passwd
+删除用户
+userdel -r username
+新建用户user0到/mnt/hdd2/目录下，并且指定用户使用的shell是/bin/bash
+useradd  -d  /mnt/hdd2/user0   -m -s  /bin/bash  user0
+
+
