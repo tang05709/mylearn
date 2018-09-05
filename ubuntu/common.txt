@@ -51,4 +51,12 @@ userdel -r username
 新建用户user0到/mnt/hdd2/目录下，并且指定用户使用的shell是/bin/bash
 useradd  -d  /mnt/hdd2/user0   -m -s  /bin/bash  user0
 
+端口查询
+lsof -i :80
+netstat -an | grep :80
 
+卸载
+sudo apt-get remove
+sudo apt-get remove --purge
+sudo apt-get autoremove
+sudo apt-get autoremove --purge
