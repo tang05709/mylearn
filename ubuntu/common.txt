@@ -73,3 +73,6 @@ scp -r localfile.txt username@remote_ip:/home/username/
 修改所有者和用户分组
 修改文件用户组，chgrp： change group的简写，修改文件所属的用户组，如果要修改该目录下所有文件和目录，使用-R参数， chgrp -R users test
 修改文件所有者，chown ：change owner的简写， 修改文件的所有者，chown [-R] 账号名称 文件或目录，chown bin test.log
+
+统计user-agent
+tail -n 1000 /nginx/log/nginx.access.log | awk -F\" '{A[$(NF-1)]++}END{for(k in A)print A[k],k}' | sort -n | tail
