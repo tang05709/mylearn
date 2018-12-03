@@ -84,3 +84,37 @@ sudo ufw enable
 sudo ufw disable
 sudo ufw status
 sudo ufw allow 80
+
+
+检查项目 : 设置密码失效时间
+加固建议: 在 /etc/login.defs 中将 PASS_MAX_DAYS 参数设置为 60-180之间，如 PASS_MAX_DAYS 90。需同时执行命令设置root密码失效时间： $ chage --maxdays 90 root。
+检查项目 : 设置密码修改最小间隔时间
+加固建议: 在 /etc/login.defs 中将 PASS_MIN_DAYS 参数设置为5-14之间,建议为7：
+ PASS_MIN_DAYS 7 需同时执行命令为root用户设置：
+ $ chage --mindays 7 root
+检查项目 : 禁止SSH空密码用户登录 
+ 
+ 
+加固建议: 在/etc/ssh/sshd_config中取消PermitEmptyPasswords no注释符号#
+检查项目 : 确保SSH MaxAuthTries设置为3到6之间
+加固建议: 在/etc/ssh/sshd_config中取消MaxAuthTries注释符号#，设置最大密码尝试失败次数3-6，建议为5：MaxAuthTries 5
+检查项目 : 设置SSH空闲超时退出时间
+加固建议: 编辑/etc/ssh/sshd_config，将ClientAliveInterval 设置为300到900，即5-15分钟，将ClientAliveCountMax设置为0。
+ ClientAliveInterval 300
+ ClientAliveCountMax 0
+检查项目 : 确保SSH LogLevel设置为INFO
+加固建议: 编辑 /etc/ssh/sshd_config 文件以按如下方式设置参数(取消注释):
+ LogLevel INFO
+检查项目 : 访问控制配置文件的权限设置
+加固建议: 运行以下4条命令：
+ $ chown root:root /etc/hosts.allow 
+ $ chown root:root /etc/hosts.deny 
+ $ chmod 644 /etc/hosts.deny
+ $ chmod 644 /etc/hosts.allow
+检查项目 : 设置用户权限配置文件的权限
+加固建议: 执行以下5条命令
+ $ chown root:root /etc/passwd /etc/shadow /etc/group /etc/gshadow
+ $ chmod 0644 /etc/group 
+ $ chmod 0644 /etc/passwd 
+ $ chmod 0400 /etc/shadow 
+ $ chmod 0400 /etc/gshadow
