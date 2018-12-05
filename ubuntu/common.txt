@@ -118,3 +118,6 @@ sudo ufw allow 80
  $ chmod 0644 /etc/passwd 
  $ chmod 0400 /etc/shadow 
  $ chmod 0400 /etc/gshadow
+ 
+ netstat -an 来显示所有连接的端口并用数字表示
+ ps -ef|grep httpd|wc -l 显示httpd进程
