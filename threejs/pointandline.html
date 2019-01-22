@@ -1,0 +1,134 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>three ar</title>
+    <style>
+      #canvas-frame {
+        width: 100%;
+        height: 600px;
+      }
+      canvas {
+        width: 100%;
+        height: 600px;
+      }
+    </style>
+    <script type="text/javascript" src="js/three.min.js"></script>
+    <script type="text/javascript" src="js/stats.min.js"></script>
+    <script type="text/javascript" src="js/ar.min.js"></script>
+    
+  </head>
+  <body>
+  <script>
+    //创建场景对象
+    var scene = new THREE.Scene();
+       
+    // 创建线条
+    // 声明一个空的几何体
+    var geometry = new THREE.Geometry(); 
+    // 创建一个点
+    var point1 = new THREE.Vector3(10, 0, 0);
+    // 创建另一个点
+    var point2 = new THREE.Vector3(0, 20, 0);
+    // 顶点坐标添加到geometry中
+    geometry.vertices.push(point1, point2);
+    // 顶点颜色
+    var color1 = new THREE.Color(0xFF0000);
+    var color2 = new THREE.Color(0x0000FF);
+    geometry.colors.push(color1, color2);
+    // 线条材质
+    var material = new THREE.LineBasicMaterial({
+      vertexColors: THREE.VertexColors
+    });
+    // 创建线条
+    var line = new THREE.Line(geometry, material);
+    scene.add(line);
+
+    // 创建面
+    // 声明一个空的几何体
+    var faceGeometry = new THREE.Geometry(); 
+    // 创建点
+    var point3 = new THREE.Vector3(0, 0, 0);
+    var point4 = new THREE.Vector3(80, 0, 0);
+    var point5 = new THREE.Vector3(0, 80, 0);
+    faceGeometry.vertices.push(point3, point4, point5);
+    // 三角面法向量
+    var normal = new THREE.Vector3(0, 0, 1);
+    // 创建三角面
+    var face = new THREE.Face3(0, 1, 2, normal);
+    // 顶点颜色
+    var color4 = new THREE.Color(0xFF0000);
+    var color5 = new THREE.Color(0x00FF00);
+    var color6 = new THREE.Color(0x0000FF);
+    face.vertexColors.push(color4, color5, color6);
+    // 顶点坐标添加到geometry中
+    faceGeometry.faces.push(face);
+    var faceMaterial = new THREE.MeshLambertMaterial({
+      vertexColors: THREE.VertexColors,
+      side: THREE.DoubleSide // 2面可见
+    });
+    var faceMesh = new THREE.Mesh(faceGeometry, faceMaterial);
+    faceMesh.translateX(100);
+    scene.add(faceMesh);
+
+    // 创建矩形平面
+    var rectGeometry = new THREE.Geometry();
+    // 创建点
+    var point6 = new THREE.Vector3(0, 0, 0);
+    var point7 = new THREE.Vector3(80, 0, 0);
+    var point8 = new THREE.Vector3(80, 80, 0);
+    var point9 = new THREE.Vector3(0, 80, 0);
+    rectGeometry.vertices.push(point6, point7, point8, point9);
+    var rectNormal = new THREE.Vector3(0, 0, 1);
+    var face1 = new THREE.Face3(0, 1, 2, rectNormal);
+    var face2 = new THREE.Face3(0, 2, 2, rectNormal);
+    rectGeometry.faces.push(face1, face2);
+    var rectMaterial = new THREE.MeshLambertMaterial({
+      color: 0x0000ff,
+      side: THREE.DoubleSide
+    });
+    var rectMesh = new THREE.Mesh(rectGeometry, rectMaterial);
+    scene.add(rectMesh);
+
+    // 创建立方体
+    var cubeGeometry = new THREE.BoxGeometry(100, 100, 100);
+    var cubeMaterial = new THREE.LineBasicMaterial({color: 0x0000ff});
+    var cubeMesh = new THREE.Line(cubeGeometry, cubeMaterial);
+    var cubeMesh = new THREE.LineLoop(cubeGeometry, cubeMaterial);
+    var cubeMesh = new THREE.LineSegments(cubeGeometry, cubeMaterial);
+    scene.add(cubeMesh);
+
+    //点光源
+    var point = new THREE.PointLight(0xffffff);
+    //点光源位置
+    point.position.set(400, 200, 300);
+    //点光源添加到场景中
+    scene.add(point);
+
+    //环境光
+    var ambient=new THREE.AmbientLight(0x444444);
+    scene.add(ambient);
+
+    var width = window.innerWidth;
+    var height = window.innerHeight;
+    //窗口宽高比
+    var k = width / height;
+    //三维场景缩放系数
+    var s = 150;
+    //创建相机对象
+    var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+    //设置相机位置
+    camera.position.set(200, 300, 200);
+    //设置相机方向(指向的场景对象)
+    camera.lookAt(scene.position);
+    
+    // 创建渲染器对象
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(width, height);
+    //设置背景颜色
+    renderer.setClearColor(0xb9d3ff, 1);
+    document.body.appendChild(renderer.domElement);
+    //执行渲染操作
+    renderer.render(scene, camera);
+  </script>
+  </body>
+  </html>
