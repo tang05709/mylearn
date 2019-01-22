@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>three ar</title>
+    <style>
+      #canvas-frame {
+        width: 100%;
+        height: 600px;
+      }
+      canvas {
+        width: 100%;
+        height: 600px;
+      }
+    </style>
+    <script type="text/javascript" src="js/three.min.js"></script>
+    <script type="text/javascript" src="js/stats.min.js"></script>
+    <script type="text/javascript" src="js/ar.min.js"></script>
+    
+  </head>
+  <body>
+    
+    <script>
+      //创建场景对象
+      var scene = new THREE.Scene();
+      //  平面
+      var plane = function(u, v, target) {
+        var width = 50, height = 100;
+        var x = u * width;
+        var y = v * height;
+        var z = 0;
+        target.set(x, y, z);
+      }
+      // 旋转抛物面 z = a2*(x2+y2)
+      var paraboloid = function(u,v, target) {
+        var k = 100;//x、y取值范围
+        var a = 0.2;//旋转抛物面焦点
+        var x = (u-0.5) * k;
+        var y = (v-0.5) * k;
+        var z = Math.pow(a, 2) * (Math.pow(x, 2) + Math.pow(y, 2));
+        target.set(x, y, z);
+      }
+      var planeGeometry = new THREE.ParametricGeometry(plane, 10, 10);
+      //var planeGeometry = new THREE.ParametricGeometry(paraboloid, 10, 10);
+      var planeMaterial = new THREE.MeshPhongMaterial({
+        color:0x0000ff,//三角面颜色
+        side:THREE.DoubleSide//两面可见
+      });
+      // 线条模式渲染
+      planeMaterial.wireframe  = true;
+      var planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
+      scene.add(planeMesh);
+      
+      // 旋转造型
+      var points = [
+        new THREE.Vector2(50,60),
+        new THREE.Vector2(25,0),
+        new THREE.Vector2(50,-60)
+      ];
+      var pointsGeometry = new THREE.LatheGeometry(points, 30);
+      var pointsMaterial = new THREE.MeshPhongMaterial({
+        color:0x0000ff,//三角面颜色
+        side:THREE.DoubleSide//两面可见
+      });
+      pointsMaterial.wireframe  = true;
+      var pointsMesh = new THREE.Mesh(pointsGeometry, pointsMaterial);
+      pointsMesh.translateX(300);
+      pointsMesh.translateY(150);
+      scene.add(pointsMesh);
+
+      var shape = new THREE.Shape();
+      var points = [//定位定点
+        new THREE.Vector2(50,60),
+        new THREE.Vector2(25,0),
+        new THREE.Vector2(50,-60)
+      ];
+      // 顶点带入样条插值计算函数 
+      shape.splineThru(points);
+      // 插值计算细分数20
+      var splinePoints = shape.getPoints(20);
+      var splineGeometry = new THREE.LatheGeometry(splinePoints, 30);
+      var splineMaterial = new THREE.MeshPhongMaterial({
+        color:0x00ffff,//三角面颜色
+        side:THREE.DoubleSide//两面可见
+      });
+      var splineMesh = new THREE.Mesh(splineGeometry, splineMaterial);
+      splineMesh.translateX(-300);
+      splineMesh.translateY(-200);
+      scene.add(splineMesh);
+
+
+
+      //环境光
+      var ambient=new THREE.AmbientLight(0x444444);
+      scene.add(ambient);
+
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      //窗口宽高比
+      var k = width / height;
+      //三维场景缩放系数
+      var s = 150;
+      //创建相机对象
+      var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+      //设置相机位置
+      camera.position.set(200, 300, 200);
+      //设置相机方向(指向的场景对象)
+      camera.lookAt(scene.position);
+      
+      // 创建渲染器对象
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(width, height);
+      //设置背景颜色
+      renderer.setClearColor(0xb9d3ff, 1);
+      document.body.appendChild(renderer.domElement);
+      //执行渲染操作
+      renderer.render(scene, camera);
+    </script>
+  </body>
+</html>
