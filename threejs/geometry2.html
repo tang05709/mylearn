@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>three ar</title>
+    <style>
+      #canvas-frame {
+        width: 100%;
+        height: 600px;
+      }
+      canvas {
+        width: 100%;
+        height: 600px;
+      }
+    </style>
+    <script type="text/javascript" src="js/three.min.js"></script>
+    <script type="text/javascript" src="js/stats.min.js"></script>
+    <script type="text/javascript" src="js/ar.min.js"></script>
+    
+  </head>
+  <body>
+    
+    <script>
+      //创建场景对象
+      var scene = new THREE.Scene();
+      
+      // 使用BoxGeometry创建
+      // BoxGeometry(width, height, depth, widthSegments, heightSegments, depthSegments)
+      var cube = new THREE.BoxGeometry(100, 100, 100);
+      // var box=new THREE.SphereGeometry(60,40,40); // 球体
+      // var box=new THREE.CylinderGeometry(20,40,100,40); // 圆台
+      // var box=new THREE.CylinderGeometry(40,40,100,40); // 圆柱
+      var material = new THREE.MeshLambertMaterial({color: 0x00ffff});
+      var mesh = new THREE.Mesh(cube, material);
+      scene.add(mesh);
+
+      // 使用PolyhedronGeometry创建
+      // 立方体顶点位置坐标
+      var vertices = [
+        -1, -1, -1,
+         1, -1, -1,
+         1,  1, -1,
+        -1,  1, -1,
+        -1, -1,  1,
+         1, -1,  1,
+         1,  1,  1,
+        -1,  1,  1
+      ];
+      // 立方体顶点索引，三个顶点定义一个三角面
+      var indices = [
+        2, 1, 0,
+        0, 3, 2,
+        0, 4, 7,
+        7, 3, 0,
+        0, 1, 5,
+        5, 4, 0,
+        1, 2, 6,
+        6, 5, 1,
+        2, 3, 7,
+        7, 6, 2,
+        4, 5, 6,
+        6, 7, 4
+      ];
+      // PolyhedronGeometry(vertices, faces, radius, detail)
+      var box = new THREE.PolyhedronGeometry(vertices, indices, 60);
+      var boxMaterial = new THREE.MeshLambertMaterial({color: 0xff00ff});
+      var boxMesh = new THREE.Mesh(box, boxMaterial);
+      boxMesh.translateX(150);
+      scene.add(boxMesh);
+
+      // 创建矩形
+      // PlaneGeometry(width, height, widthSegments, heightSegments)
+      var planeGeometry = new THREE.PlaneGeometry(30, 50);
+      var planeMaterial=new THREE.MeshLambertMaterial({
+        color: "#00ff00",
+        side: THREE.DoubleSide
+      });
+      var planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
+      planeMesh.translateX(300);
+      planeMesh.translateY(100);
+      scene.add(planeMesh);
+
+      // CircleGeometry(radius, segments, thetaStart, thetaLength)
+      // 创建正五边形
+      var fiveGeometry = new THREE.CircleGeometry(50, 5);
+      var fiveMaterial=new THREE.MeshLambertMaterial({
+        color: "#ff0000",
+        side: THREE.DoubleSide
+      });
+      var fiveMesh = new THREE.Mesh(fiveGeometry, fiveMaterial);
+      fiveMesh.translateX(300);
+      fiveMesh.translateY(200);
+      scene.add(fiveMesh);
+
+      // 创建圆形
+      var circleGeometry = new THREE.CircleGeometry(50, 50);
+      var circleMaterial=new THREE.MeshLambertMaterial({
+        color: "#ffff00",
+        side: THREE.DoubleSide
+      });
+      var circleMesh = new THREE.Mesh(circleGeometry, circleMaterial);
+      circleMesh.translateX(-300);
+      circleMesh.translateY(-200);
+      scene.add(circleMesh);
+
+       // 创建扇形
+       var sectorGeometry = new THREE.CircleGeometry(50, 50, 0, 0.5 * Math.PI);
+      var sectorMaterial=new THREE.MeshLambertMaterial({
+        color: "#ff00ff",
+        side: THREE.DoubleSide
+      });
+      var sectoreMesh = new THREE.Mesh(sectorGeometry, sectorMaterial);
+      sectoreMesh.translateX(-300);
+      sectoreMesh.translateY(-100);
+      scene.add(sectoreMesh);
+
+      //点光源
+      var point = new THREE.PointLight(0xffffff);
+      //点光源位置
+      point.position.set(400, 200, 300);
+      //点光源添加到场景中
+      scene.add(point);
+
+      //环境光
+      var ambient=new THREE.AmbientLight(0x444444);
+      scene.add(ambient);
+
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      //窗口宽高比
+      var k = width / height;
+      //三维场景缩放系数
+      var s = 150;
+      //创建相机对象
+      var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+      //设置相机位置
+      camera.position.set(200, 300, 200);
+      //设置相机方向(指向的场景对象)
+      camera.lookAt(scene.position);
+      
+      // 创建渲染器对象
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(width, height);
+      //设置背景颜色
+      renderer.setClearColor(0xb9d3ff, 1);
+      document.body.appendChild(renderer.domElement);
+      //执行渲染操作
+      renderer.render(scene, camera);
+    </script>
+  </body>
+</html>
