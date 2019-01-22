@@ -1,0 +1,175 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>three ar</title>
+    <style>
+      #canvas-frame {
+        width: 100%;
+        height: 600px;
+      }
+      canvas {
+        width: 100%;
+        height: 600px;
+      }
+    </style>
+    <script type="text/javascript" src="js/three.min.js"></script>
+    <script type="text/javascript" src="js/stats.min.js"></script>
+    <script type="text/javascript" src="js/ar.min.js"></script>
+    
+  </head>
+  <body>
+    
+    <script>
+      //创建场景对象
+      var scene = new THREE.Scene();
+      // 圆弧，点模式渲染
+      var pointShape = new THREE.Shape();
+      pointShape.absarc(0, 0, 100, 0, 0.5 * Math.PI);
+      var pointGeometry = new THREE.ShapeGeometry(pointShape);
+      var pointMaterial = new THREE.PointsMaterial({
+        color:0x0000ff,
+        size:10.0//点对象像素尺寸
+      });
+      var pointLine = new THREE.Points(pointGeometry, pointMaterial);
+      scene.add(pointLine);
+
+      // 圆弧， 线模式渲染
+      var lineShape = new THREE.Shape();
+      lineShape.absarc(0, 0, 100, 0, 0.5 * Math.PI);
+      var lineGeometry = new THREE.ShapeGeometry(lineShape);
+      var lineMaterial = new THREE.LineBasicMaterial({color: "#ff00ff"});
+      var lineLine = new THREE.Line(lineGeometry, lineMaterial);
+      lineLine.translateX(100);
+      scene.add(lineLine);
+
+      // 圆弧， 面模式渲染
+      var planeShape = new THREE.Shape();
+      planeShape.absarc(0, 0, 100, 0, 0.5 * Math.PI);
+      var planeGeometry = new THREE.ShapeGeometry(planeShape);
+      var planeMaterial = new THREE.MeshLambertMaterial({
+        color: "#00ff00",
+        side:THREE.DoubleSide //两面可见
+      });
+      var planeMesh = new THREE.Mesh(planeGeometry, planeMaterial);
+      planeMesh.translateX(200);
+      planeMesh.translateY(100);
+      scene.add(planeMesh);
+
+      // 创建点模型
+      var mpointShape = new THREE.Shape();
+      mpointShape.absarc(0, 0, 100, 0, 0.5 * Math.PI);
+      var mpointGeometry = mpointShape.makeGeometry();
+      // var mpointGeometry = mpointShape.createPointsGeometry(20); //细分数20
+      // var mpointGeometry = mpointShape.createSpacedPointsGeometry(15); //细分数15
+      var mpointMaterial = new THREE.PointsMaterial({
+        color: "#00ffee",
+        size: 10.0//点对象像素尺寸
+      });
+      var mpointLine = new THREE.Line(mpointGeometry, mpointMaterial);
+      mpointLine.translateX(300);
+      mpointLine.translateY(100);
+      scene.add(mpointLine);
+
+      // 创建拉伸网格模型
+      var extrudeShape = new THREE.Shape();
+      // 四条直线绘制一个矩形轮廓 
+      // 起点
+      extrudeShape.moveTo(0, 0);
+      //第2点
+      extrudeShape.lineTo(0, 100);
+      //第3点
+      extrudeShape.lineTo(100, 100);
+      //第4点
+      extrudeShape.lineTo(100, 0);
+      //第5点
+      extrudeShape.lineTo(0, 0);
+      //拉伸造型 
+      var extrudeGeometry = new THREE.ExtrudeGeometry(
+        extrudeShape,//二维轮廓
+        // 拉伸参数
+        {
+          amount: 120, // 拉伸长度
+          bevelEnabled: false // 无倒角
+        }
+      );
+      var extrudeMaterial = new THREE.MeshPhongMaterial({color: "#00d628"});
+      var extrudeMesh = new THREE.Mesh(extrudeGeometry, extrudeMaterial);
+      // 通过点模式渲染，可以看到空间点的分布
+      /*var extrudeMaterial=new THREE.PointsMaterial({
+        color:  "#00d628",
+        size:5.0//点对象像素尺寸
+      });
+      var extrudeMesh=new THREE.Points(extrudeGeometry,extrudeMaterial);*/
+      extrudeMesh.translateX(-120);
+      scene.add(extrudeMesh);
+
+      // 创建扫描/管道网格模型
+      var scanShape = new THREE.Shape();
+      // 起点
+      scanShape.moveTo(0, 0);
+      //第2点
+      scanShape.lineTo(0, 10);
+      //第3点
+      scanShape.lineTo(10, 10);
+      //第4点
+      scanShape.lineTo(10, 0);
+      //第5点
+      scanShape.lineTo(0, 0);
+      //创建轮廓的扫描轨迹(3D样条曲线)
+      var curve = new THREE.SplineCurve3([
+        new THREE.Vector3( -10, -50, -50 ),
+        new THREE.Vector3( 10, 0, 0 ),
+        new THREE.Vector3( 8, 50, 50 ),
+        new THREE.Vector3( -5, 0, 100)
+      ]);
+      //扫描网格
+     /* var scanGeometry = new THREE.ExtrudeGeometry(
+        scanShape,//二维轮廓
+        // 拉伸参数
+        {
+          bevelEnabled: false, // 无倒角
+          extrudePath: curve,//选择扫描轨迹
+          steps:50 //扫描方向细分数
+        }
+      );
+      var scanMaterial = new THREE.MeshPhongMaterial({color: "#00ff00"});*/
+      //  管道网格
+      var scanGeometry = new THREE.TubeGeometry(curve, 40, 2, 8, false);
+      var scanMaterial = new THREE.MeshPhongMaterial({
+        color: "#00ff00",
+        side:THREE.DoubleSide
+        });
+      var scanMesh = new THREE.Mesh(scanGeometry, scanMaterial);
+      scanMesh.translateX(-300);
+      scanMesh.translateY(-200);
+      scene.add(scanMesh);
+
+
+      //环境光
+      var ambient=new THREE.AmbientLight(0x444444);
+      scene.add(ambient);
+
+      var width = window.innerWidth;
+      var height = window.innerHeight;
+      //窗口宽高比
+      var k = width / height;
+      //三维场景缩放系数
+      var s = 150;
+      //创建相机对象
+      var camera = new THREE.OrthographicCamera(-s * k, s * k, s, -s, 1, 1000);
+      //设置相机位置
+      camera.position.set(200, 300, 200);
+      //设置相机方向(指向的场景对象)
+      camera.lookAt(scene.position);
+      
+      // 创建渲染器对象
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(width, height);
+      //设置背景颜色
+      renderer.setClearColor(0xb9d3ff, 1);
+      document.body.appendChild(renderer.domElement);
+      //执行渲染操作
+      renderer.render(scene, camera);
+    </script>
+  </body>
+</html>
