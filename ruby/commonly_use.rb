@@ -23,3 +23,21 @@ end
 
 # 转码
 str.encode('utf-8','gbk',{:invalid => :replace, :undef => :replace, :replace => '?'})
+
+#设置自动加载
+config.autoload_paths += %W(#{config.root}/lib/jizan) 
+
+#设置时区
+config.time_zone = 'Beijing'
+#设置语言
+config.i18n.enforce_available_locales = false
+config.i18n.default_locale = :'zh-CN'
+#设置编码
+config.encoding = "utf-8"
+
+#随机密码
+def self.rand_password
+  len = 6
+  chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
+  Array.new(len, '').collect{chars[rand(chars.size)]}.join
+end
