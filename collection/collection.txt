@@ -43,3 +43,7 @@ http://scipy-lectures.org/
 https://py4e.com/book.php
 
 https://pypi.org/
+
+轮播库
+https://www.swiper.com.cn/
+http://kenwheeler.github.io/slick/
