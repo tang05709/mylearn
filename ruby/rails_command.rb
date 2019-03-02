@@ -17,3 +17,5 @@ rails cable 修改后需要重启 passenger和redius
 passenger-config restart-app
 /etc/init.d/redis-server restart
 
+gem list bundle
+gem env
