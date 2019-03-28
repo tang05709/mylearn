@@ -47,6 +47,7 @@ https://pypi.org/
 轮播库
 https://www.swiper.com.cn/
 http://kenwheeler.github.io/slick/
+http://owlcarousel2.github.io/OwlCarousel2/index.html
 
 免费to do list
 https://trello.com/
