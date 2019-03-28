@@ -48,6 +48,7 @@ https://pypi.org/
 https://www.swiper.com.cn/
 http://kenwheeler.github.io/slick/
 http://owlcarousel2.github.io/OwlCarousel2/index.html
+http://brutaldesign.github.io/swipebox/#rel
 
 免费to do list
 https://trello.com/
