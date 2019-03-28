@@ -58,6 +58,7 @@ https://daneden.github.io/animate.css/
 
 js 动画增强
 http://gsgd.co.uk/sandbox/jquery/easing/
+https://www.delac.io/wow/
 
 three 3d
 https://threejs.org/
