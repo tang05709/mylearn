@@ -56,5 +56,8 @@ https://trello.com/
 css 动画库
 https://daneden.github.io/animate.css/
 
+js 动画增强
+http://gsgd.co.uk/sandbox/jquery/easing/
+
 three 3d
 https://threejs.org/
