@@ -41,3 +41,6 @@ def self.rand_password
   chars = ("a".."z").to_a + ("A".."Z").to_a + ("0".."9").to_a
   Array.new(len, '').collect{chars[rand(chars.size)]}.join
 end
+
+#去除数组中的空值
+array.delete_if(&:blank?)
