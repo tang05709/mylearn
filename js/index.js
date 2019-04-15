@@ -36,3 +36,5 @@ jxcatGetStorageSync: function(key, value) {
   return res
 }
 /*****小程序缓存过期******/
+
+$('html , body').animate({scrollTop: 0},'slow');
