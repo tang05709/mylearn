@@ -5,3 +5,7 @@ while(isset($s[$i]) && $s[$i] != null) {
     $o = $s[$i++].$o;
 }
 echo $o;
+
+
+list($b,$a)=array($a,$b);
+var_dump($a,$b);
