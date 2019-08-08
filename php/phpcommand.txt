@@ -1,0 +1,8 @@
+yii命令
+php yii migrate/create create_news_table
+php yii migrate
+php yii gii/model --ns=app\models --tableName=news --modelClass=News
+php yii gii/crud --modelClass=app\models\News --controllerClass=app\controllers\NewsController
+
+laravel命令
+
