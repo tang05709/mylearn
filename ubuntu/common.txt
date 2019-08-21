@@ -124,3 +124,6 @@ sudo ufw allow 80
  netstat -nat|grep -i "80"|wc -l
  netstat -n | awk '/^tcp/ {++y[$NF]} END {for(w in y) print w, y[w]}'
  netstat -nat|awk '{print$5}'|awk -F : '{print$1}'|sort|uniq -c|sort -rn
+
+// 查看文件
+tail -n 100 nginx.log
