@@ -8,6 +8,9 @@ service nginx start
 service nginx stop
 service nginx restart
 
+centos
+systemctl restart nginx
+
 /etc/init.d/elasticsearch start
 /etc/init.d/elasticsearch stop
 /etc/init.d/elasticsearch restart
