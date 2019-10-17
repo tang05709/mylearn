@@ -68,3 +68,7 @@ https://cloud.tencent.com/developer/doc/1116
 
 //微软系工具
 http://www.imsdn.cn/
+
+
+数据科学社区
+http://sofasofa.io/index.php
