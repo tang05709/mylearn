@@ -72,3 +72,6 @@ http://www.imsdn.cn/
 
 数据科学社区
 http://sofasofa.io/index.php
+
+python学习
+https://morvanzhou.github.io/tutorials/machine-learning/torch/
