@@ -76,3 +76,6 @@ http://sofasofa.io/index.php
 
 python学习
 https://morvanzhou.github.io/tutorials/machine-learning/torch/
+
+国家省市区编码
+https://github.com/cn
