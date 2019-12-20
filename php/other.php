@@ -38,6 +38,42 @@ private function makeTimeCut($start_at, $end_at, $count) {
 
     return $times;
 }
+       
+public function encrypt($info, $key)
+{
+    $string = json_encode($info);
+    // openssl_encrypt 加密不同Mcrypt，对秘钥长度要求，超出16加密结果不变       
+    $data = openssl_encrypt($string, 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+    $data = strtolower($this->hexXbin($data, true));
+    return $data;
+}
+
+public function hexXbin($data, $types = false)
+{
+    if (!is_string($data))
+        return 0;
+    if ($types === false) {
+        $len = strlen($data);
+        if ($len % 2) {
+            return 0;
+        } else if (strspn($data, '0123456789abcdefABCDEF') != $len) {
+            return 0;
+        }
+        return pack('H*', $data);
+    } else {
+        return bin2hex($data);
+    }
+}
+
+public function decrypt($string, $key)
+{
+    $temp = openssl_decrypt($this->hexXbin($string), 'AES-128-ECB', $key, OPENSSL_RAW_DATA);
+    $result = [];
+    if ($temp) {
+        $result = json_decode($temp, true);
+    }
+    return $result;
+}
             
             
   public static function generateSn()
