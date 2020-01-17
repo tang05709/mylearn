@@ -4,6 +4,8 @@ http://www.sharebuttons.com/
 https://placeholder.com/
 表单工具
 http://mikecrm.com/
+unicode表情
+http://unicode.org/emoji/charts/emoji-list.html
 
 jar包查找
 https://www.findjar.com/index.x
