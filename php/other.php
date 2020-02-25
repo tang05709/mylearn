@@ -81,3 +81,19 @@ public function decrypt($string, $key)
        $SN = date("YmdHis") . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9) . rand(0, 9);
        return $SN;
   }
+
+public  function  getMenu($data,$pid,$deep=0)
+   {
+       //static $tree=array();
+       $tree='';
+       foreach ($data as $row) {
+           if($row['parentid']==$pid){
+              $row['deep']=$deep;
+              $row['children']=$this->getMenu($data,$row['id'],$deep+1);
+              $tree[]=$row;
+              //$this->getMenu($data,$row['id'],$deep+1);
+           }
+       }
+       return $tree;
+
+   }
