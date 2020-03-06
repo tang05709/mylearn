@@ -94,3 +94,6 @@ https://mirrors.tuna.tsinghua.edu.cn/
 
 sdk
 https://sdk.cn/
+
+淘链客
+http://www.toplinks.cc/s/
