@@ -9,6 +9,7 @@ http://unicode.org/emoji/charts/emoji-list.html
 
 jar包查找
 https://www.findjar.com/index.x
+https://mvnrepository.com/
 
 在线工具包
 http://www.life-cream.com/toolbox/#data
