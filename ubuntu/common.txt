@@ -130,3 +130,6 @@ sudo ufw allow 80
 
 // 查看文件
 tail -n 100 nginx.log
+
+// 微信小程序
+./bin/wxdt --disable-gpu
