@@ -143,3 +143,6 @@ export CLASSPATH=$JAVA_HOME/lib
 
 // 查看linux分区
 lsblk
+
+// 切换php
+sudo update-alternatives --set php /usr/bin/php5.6
