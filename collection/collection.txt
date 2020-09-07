@@ -118,3 +118,11 @@ https://www.iconfont.cn/
 
 在线压缩
 https://docsmall.com/
+
+
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+
+php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+composer.bat  @php "%~dp0composer.phar" %*
