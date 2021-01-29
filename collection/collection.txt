@@ -140,3 +140,6 @@ https://npm.taobao.org/mirrors/git-for-windows/
 
 孔壹学院
 https://www.chaindesk.cn/witbook
+
+淘宝svg工具
+https://market.m.taobao.com/app/fdilab/svg-tool-demo/pages/index/index.html
